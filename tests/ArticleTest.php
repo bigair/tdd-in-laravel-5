@@ -24,4 +24,18 @@ class ArticleTest extends TestCase
 
         $this->assertEquals(0, count($articles));
     }
+
+    public function testCreateAndList()
+    {
+        for ($i = 1; $i <=10; $i++)
+        {
+            Article::create([
+                'title' => 'title ' . $i,
+                'body'  => 'body ' . $i,
+            ]);
+        }
+
+        $articles = Article::all();
+        $this->assertEquals(10, count($articles));
+    }
 }
