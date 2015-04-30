@@ -8,4 +8,9 @@ class ArticleRepository
     {
         return Article::query()->orderBy('id', 'desc')->limit(10)->get();
     }
+
+    public function create(array $attributes)
+    {
+        return Article::create($attributes);
+    }
 }

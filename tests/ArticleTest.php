@@ -27,6 +27,8 @@ class ArticleTest extends TestCase
 
     public function testCreateAndList()
     {
+        $articleCount = 10;
+
         for ($i = 1; $i <=10; $i++)
         {
             Article::create([
@@ -36,6 +38,6 @@ class ArticleTest extends TestCase
         }
 
         $articles = Article::all();
-        $this->assertEquals(10, count($articles));
+        $this->assertEquals($articleCount, count($articles));
     }
 }
