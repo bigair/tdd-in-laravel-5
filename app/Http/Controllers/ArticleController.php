@@ -1,7 +1,7 @@
 <?php namespace App\Http\Controllers;
 
-use App\Http\Requests\ArticleRequest;
 use App\Repositories\ArticleRepository;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Redirect;
 
@@ -12,7 +12,6 @@ class ArticleController extends Controller
 
     public function __construct(ArticleRepository $post)
     {
-        $this->middleware('auth', ['except' => 'index']);
         $this->repository = $post;
     }
 
@@ -44,7 +43,7 @@ class ArticleController extends Controller
      * @param ArticleRequest $request
      * @return Response
      */
-    public function store(ArticleRequest $request)
+    public function store(Request $request)
     {
         $this->repository->create($request->all());
 

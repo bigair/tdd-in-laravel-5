@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Session;
+
 class ArticleControllerTest extends TestCase {
 
     protected $repositoryMock = null;
@@ -30,6 +32,23 @@ class ArticleControllerTest extends TestCase {
 
         // 應取得 articles 變數
         $this->assertViewHas('articles', []);
+    }
+
+    public function testCreateArticleSuccess()
+    {
+        $this->repositoryMock
+            ->shouldReceive('create')
+            ->once();
+
+        Session::start();
+
+        $this->call('POST', 'articles', [
+            'title' => 'title 999',
+            'body'  => 'body 999',
+            '_token'    => csrf_token(),    // 手動加入 _token
+            ]);
+
+        $this->assertRedirectedToRoute('articles.index');
     }
 
     public function testCsrfFailed()
